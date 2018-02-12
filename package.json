@@ -1,0 +1,29 @@
+{
+  "name": "hey-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droopert/hey-javascript.git"
+  },
+  "keywords": [
+    "javascript",
+    "elm",
+    "functional programming"
+  ],
+  "author": "Droopert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/droopert/hey-javascript/issues"
+  },
+  "homepage": "https://github.com/droopert/hey-javascript#readme",
+  "dependencies": {
+    "ace-builds": "^1.3.1",
+    "reveal.js": "^3.6.0"
+  },
+  "devDependencies": {}
+}

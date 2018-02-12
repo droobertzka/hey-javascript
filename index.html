@@ -1,0 +1,257 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./node_modules/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="./node_modules/reveal.js/css/theme/solarized.css">
+    <link rel="stylesheet" href="./src/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+        <!-- ********** -->
+        <!-- * SLIDES * -->
+        <!-- ********** -->
+
+
+        <!-- * SLIDE 1 * -->
+				<section>
+          <h1>Hey Javascript, You're Doing it Wrong</h1>
+          <hr class="style-eight"/>
+          <p>by Andrew Barrette</p>
+          <p><small>February 2018</small></p>
+        </section>
+
+
+        <!-- * SLIDE 2 * -->
+        <section>
+          <h2>Ass, You, Me</h2>
+          <br>
+
+          <h4>1. FP concepts are useful</h4>
+          <hr class="style-eight"/>
+
+          <h4>2. FP is increasingly important</h4>
+          <hr class="style-eight"/>
+
+          <h4>3. JavaScript, FP fundamentals</h4>
+          <p>
+            <small>
+              lambdas / first-class functions<br>
+              pure functions, immutability, side effects<br>
+              partial application & curried functions<br>
+              function composition & pointfree style
+            </small>
+          </p>
+        </section>
+
+
+        <!-- * SLIDE 3 * -->
+        <section>
+          <h2>Dr. Boolean</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/m3svKOdZijA?rel=0&amp;start=404" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <p>
+            Brian Lonsdorf<br>
+            HTML5 Dev Conf, 2013
+          </p>
+          <p><small>
+            GitBook & Egghead IO videos: <a href="https://drboolean.gitbooks.io/mostly-adequate-guide">Mostly Adequate Guide to FP</a><br>
+            FE Masters Course: <a href="https://frontendmasters.com/courses/functional-javascript/">Hardcore FP in JS</a>
+          </small></p>
+
+          <aside class="notes">
+            <p>He skips the first point I'd like to make: FP in JS is not idomatic (prototype methods always mean data-first).</p>
+            <p>The larger point, however, is that small changes in syntax can make a dramatic, difference in how we fundamentally approach & solve problems in a language.</p>
+          </aside>
+        </section>
+
+
+        <!-- * SLIDE 4 * -->
+				<section>
+          <h2>We Will Examine</h2>
+          <ol>
+            <li>native JavaScript in FP-style</li>
+            <li>functional JS libraries <small>(<a href="http://ramdajs.com/">ramda</a>, <a href="https://github.com/lodash/lodash/wiki/FP-Guide">lodash/fp</a>)</small></li>
+            <li>a purely functional language <small>(<a href="http://elm-lang.org/">elm-lang</a>)</small></li>
+          </ol>
+          <hr class="style-eight"/>
+
+          <h2><em>NOT...</em></h2>
+          <ol>
+            <li>merits/demerits of FP vs. OOP</li>
+            <li>in-depth explanations of basic FP concepts</li>
+            <li>category theory & fancy jargon</li>
+          </ol>
+        </section>
+
+
+        <!-- * SLIDE 5 * -->
+        <section>
+          <h2>FP-style JavaScript</h2>
+          <p>Do some normal JS stuff here that shows flaw of prototype methods requiring data first</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// users = [{ ...user1 }, { ...user2 }, ...]
+users.filter(user => user.friends.length)
+  .forEach(friends => {
+    friends.filter(friend => friend.isActive)
+      .map(friend => friendTemplate(friend))
+  })
+</iframe>
+        </section>
+
+
+        <!-- * SLIDE 5 * -->
+        <section>
+          <h2>FP-style JavaScript</h2>
+          <p>Do some basic stuff to get around flaw of OOP-pattern prototype methods</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Utils
+const partial = (fn, ...args) =>
+  fn.bind(null, ...args)
+
+const reverse = fn => (...args) =>
+  fn.call(...args.reverse())
+
+const filter = reverse(Array.prototype.filter)
+
+// Contrived Example
+const isEven = x => !(x % 2)
+const filterOdds = partial(filter, isEven)
+// ...somewhere else
+filterOdds([ 1, 2, 4, 5, 6, 7, 7, 10, 12, 101]) // => [ 2, 4, 6, 10, 12 ]
+</iframe>
+        </section>
+
+
+        <!-- * SLIDE 6 * -->
+        <section>
+          <h2>FP-style JavaScript</h2>
+          <p>Show how quickly it becomes overly complex.</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Simple curry
+const simpleCurry = (fn, args = []) =>
+  args.length < fn.length
+    ? x => simpleCurry(fn, args.concat([x]))
+    : fn.apply(null, args)
+
+// NOTE: arity param needed for prototype methods (fn.length is undefined)
+const curry = (fn, arity = fn.length, args = []) =>
+  args.length < arity
+    ? x => curry(fn, arity, args.concat([x]))
+    : fn.apply(null, args)
+</iframe>
+        </section>
+
+
+        <!-- * SLIDE 7 * -->
+        <section>
+          <h2>FP Libraries</h2>
+          <p>Show how Ramda and lodash/fp can help.</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Some code here
+</iframe>
+        </section>
+
+
+        <!-- * SLIDE 8 * -->
+        <section>
+          <h2>FP Libraries</h2>
+          <p>Show how even with FP Libraries, the code quickly becomes ugly, verbose, and cluttered with parens and such.</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Some code here
+</iframe>
+        </section>
+
+
+        <!-- * SLIDE 9 * -->
+        <section>
+          <h2>Elm</h2>
+          <p>Ahhhh...</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Some code here
+</iframe>
+          <aside class="notes">
+            Everything is curried. Everything is a function, so no need for parens.
+          </aside>
+        </section>
+
+
+        <!-- * SLIDE 10 * -->
+        <section>
+          <h2>Elm</h2>
+          <p>In addition to simpler syntax, we can parially apply infix operators, getting a prop is a composable function, and other neat stuff!</p>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+// Some code here
+</iframe>
+        </section>
+
+        <!-- ************ -->
+        <!-- * EXAMPLES * -->
+        <!-- ************ -->
+        <section>
+          <h1>Headers, List Example</h1>
+          <h2>Level 2</h2>
+          <h3>Level 3</h3>
+          <ul>
+            <li>Something in a list</li>
+            <li>Another thing in a list</li>
+          </ul>
+          <p>Here is a <a href="#">paragraph of text</a> with a link.</p>
+        </section>
+
+        <section>
+          <h2>Code Snippet Example</h2>
+<iframe class="ace" width=800 height=400 data-mode="javascript">
+const partial = (fn, ...args) => {
+  return fn.bind(null, ...args)
+}
+
+const reverse = fn => (...args) =>
+fn.call(...args.reverse())
+
+// NOTE: arity is needed since prototype methods dont have proper length
+const curry = (fn, arity = fn.length, args = []) =>
+args.length < arity
+? x => curry(fn, arity, args.concat([x]))
+: fn.apply(null, args)
+</iframe>
+        </section>
+
+        <section>
+    			<section>
+            <h2>Vertical Slide Example (1)</h2>
+          </section>
+    			<section>
+            <h2>Vertical Slide Example (2)</h2>
+          </section>
+    		</section>
+
+        <section>
+          <h1>Image Example</h1>
+          <image alt="code" src="./images/code.png"/>
+        </section>
+
+
+        <!-- ********** -->
+        <!-- * UNUSED * -->
+        <!-- ********** -->
+
+        <!-- <section>
+          <h2>FP (in JS) === <em>Trending</em></h2>
+          <p>
+            google <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
+              says so
+            </a>
+          </p>
+          <p>
+            so many <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
+              articles
+            </a>
+          </p>
+        </section> -->
+			</div>
+		</div>
+		<script src="./node_modules/reveal.js/js/reveal.js"></script>
+    <script src="./src/reveal-init.js"></script>
+    <script src="./src/ace-iframes.js"></script>
+	</body>
+</html>

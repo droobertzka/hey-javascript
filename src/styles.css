@@ -1,0 +1,53 @@
+body {
+  background: #fff;
+  background-color: #fff;
+}
+
+.reveal {
+  color: #538ca0;
+}
+
+.reveal a {
+  color: #9ccca0;
+}
+
+.reveal small {
+  vertical-align: baseline;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  line-height: 1;
+}
+
+.reveal .controls {
+  color: #9ccca0;
+}
+
+iframe.ace {
+  margin: 15px 0;
+}
+
+hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #9ccca0;
+    color: #9ccca0;
+    text-align: center;
+    margin: 60px 60px 30px;
+}
+
+hr.style-eight:after {
+    content: "\03BB";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: .5em;
+    background: white;
+}
+
+.g-trends iframe {
+  height: 35%;
+  min-height: 350px;
+  max-width: 600px;
+}

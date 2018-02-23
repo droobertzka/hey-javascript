@@ -1,0 +1,168 @@
+<!-- ********** -->
+<!-- * UNUSED * -->
+<!-- ********** -->
+
+<!-- <section>
+	<h2>FP Libraries</h2>
+	<p>Ramda (or lodash/fp) to the... <b>wait, wut</b></p>
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+/**
+* Mostly Adequate Guide, Chapter 8
+*/
+
+// utils/params.js
+const url = new IO(() => window.location.href)
+const toPairs = _.compose(_.map(_.split('=')), _.split('&'))
+const params = _.compose(toPairs, _.last, _.split('?'))
+
+const findParam = key =>
+_.map(_.compose(Maybe.of, _.filter(_.compose(_.equals(key), _.head)), params), url)
+
+// app.js
+findParam('searchTerm').unsafePerformIO()
+// => Maybe(['searchTerm', 'wafflehouse'])
+</iframe>
+	<aside class="notes">
+
+	</aside>
+</section> -->
+
+
+<!-- <section>
+	<h2>Elm</h2>
+	<p>Ahhhh... :)</p>
+<iframe class="ace" width=810 height=400 data-mode="elm">
+-- utils/params.elm
+url = IO window.location.href
+toPairs = map (split "=") << (split "&")
+params = toPairs << (drop 1) << (split "?")
+
+findParam key =
+map (filter ((==) key << head) << params) url
+
+-- app.elm
+IO.get <| findParam "searchTerm"
+// => Maybe ["searchTerm", "wafflehouse"]
+</iframe>
+	<aside class="notes">
+		<p>Everything is curried. Everything is a function, so no need for parens.<p>
+		<p>Maybe is returned, no need to manualy wrap result.</p>
+		<p>Compose infix operator.</p>
+		<p>Infix operators are curryable functions</p>
+	</aside>
+</section> -->
+
+
+<!-- * 4A * -->
+<!-- <section>
+	<h2>Dr. Boolean</h2>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/m3svKOdZijA?rel=0&amp;start=404" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	<p>
+		Brian Lonsdorf<br>
+		HTML5 Dev Conf, 2013
+	</p>
+	<p><small>
+		GitBook & Egghead IO videos: <a href="https://drboolean.gitbooks.io/mostly-adequate-guide">Mostly Adequate Guide to FP</a><br>
+		FE Masters Course: <a href="https://frontendmasters.com/courses/functional-javascript/">Hardcore FP in JS</a>
+	</small></p>
+
+	<aside class="notes">
+		<p>He skips the first point I'd like to make: FP in JS is not idomatic (prototype methods always mean data-first).</p>
+		<p>The larger point, however, is that small changes in syntax can make a dramatic difference in how we fundamentally approach & solve problems in a language.</p>
+	</aside>
+</section> -->
+
+
+
+
+<!-- * SLIDE 3 * -->
+
+<!-- * 3A * -->
+<!-- <section data-transition="slide-in fade-out">
+	<h2>Little Things, Big Woop</h2>
+	<p>There's got to be a better way!</p>
+
+<iframe class="ace" width=810 height=450 data-mode="javascript">
+const replace = (text, match, replacement) =>
+text.replace(match, replacement)
+
+const snakeCase = text => replace(text, /\s+/g, '_')
+
+const kebabCase = text => replace(text, /\s+/g, '-')
+
+const plusCase = text => replace(text, /\s+/g, '+')
+
+// elsewhere in our code...
+getSomeText('https://baconipsum.com/api/?type=meat-and-filler')
+.then(text => snakeCase(text))
+</iframe>
+
+	<aside class="notes">
+		<p>First, just use the lamda in the `then`
+		<p>There has to be a way to make this more DRY!</p>
+		<p>1. Very important, DATA LAST!</p>
+		<p>2. Every argument returns a new function with the previous arguments applied to its scope.</p>
+		<p>3. One problem - ugly butt syntax :(</p>
+	</aside>
+</section> -->
+
+<!-- * 3B * -->
+<!-- <section data-transition="fade-in slide-out">
+	<h2>Little Things, Big Woop</h2>
+	<p>Currying to the rescue!</p>
+
+<iframe class="ace" width=810 height=450 data-mode="javascript">
+// Currying (`replace` is now a curried function)
+const replace = match => replacement => text =>
+text.replace(match, replacement)
+
+// Partial application
+const replaceSpaces = replace(/\s+/g)
+
+const snakeCase = replaceSpaces('_')
+
+const kebabCase = replaceSpaces('-')
+
+const plusCase = replaceSpaces('+')
+
+// One problem...
+replace(/\&amp;/g)('&')(text) // <- ugly butt syntax
+</iframe>
+
+	<aside class="notes">
+		<p>There has to be a way to make this more DRY!</p>
+		<p>In fact, it's the inspiration for the title of this talk:<br>
+			in 2013 in a speech called "Hey Underscore, You're Doing It Wrong"<br>
+			Brian Lonsdorf pointed out that every utility in Underscore could<br>
+			be made more useful simply by swapping the order of the arguments.
+		</p>
+		<p>The takeaway is that small changes in syntax can make a dramatic<br>
+			difference in how we fundamentally approach & solve problems in a language.
+		</p>
+	</aside>
+</section> -->
+
+
+<!-- <section>
+	<h2>Elm</h2>
+	<p>In addition to simpler syntax, we can parially apply infix operators, getting a prop is a composable function, and other neat stuff!</p>
+<iframe class="ace" width=810 height=400 data-mode="elm">
+// Some code here
+</iframe>
+</section> -->
+
+
+
+<!-- <section>
+	<h2>FP (in JS) === <em>Trending</em></h2>
+	<p>
+		google <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
+			says so
+		</a>
+	</p>
+	<p>
+		so many <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
+			articles
+		</a>
+	</p>
+</section> -->

@@ -51,3 +51,7 @@ hr.style-eight:after {
   min-height: 350px;
   max-width: 600px;
 }
+
+.resources-list li {
+	font-size: .5em;
+}

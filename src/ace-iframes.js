@@ -26,7 +26,10 @@ var RevealAce = window.RevealAce || (function() {
 		d.write("<!DOCTYPE html><html>"+
 			"<head>"+
 			"<script src='./node_modules/ace-builds/src-noconflict/ace.js' type='text/javascript' charset='utf-8'></script>"+
-			"<style>.ace_gutter-cell { padding-left: 3px!important; }</style>"
+			"<style>"+
+			".ace_gutter-cell { padding-left: 3px!important; }"+
+			".ace-ambiance span.ace_comment { color: #8e8e8e; }"+
+			"</style>"
 		);
 		if (mode) {
 			d.write("<script src='./node_modules/ace-builds/src-noconflict/mode-" + mode + ".js' type='text/javascript' charset='utf-8'></script>");

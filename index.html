@@ -4,16 +4,14 @@
 		<link rel="stylesheet" href="./node_modules/reveal.js/css/theme/solarized.css">
     <link rel="stylesheet" href="./src/styles.css">
 	</head>
-	<body>
+	<body id="heyJavascript">
 		<div class="reveal">
 			<div class="slides">
 
-        <!-- ********** -->
-        <!-- * SLIDES * -->
-        <!-- ********** -->
-
-
+				<!-- *********** -->
         <!-- * SLIDE 1 * -->
+				<!-- *********** -->
+				<!-- * Title * -->
 				<section>
           <h1>Hey Javascript, You're Doing it Wrong</h1>
           <hr class="style-eight"/>
@@ -21,117 +19,154 @@
           <p><small>February 2018</small></p>
         </section>
 
-
+				<!-- *********** -->
         <!-- * SLIDE 2 * -->
-        <section>
-          <h2>Ass, You, Me</h2>
-          <br>
-
-          <h4>1. FP concepts are useful</h4>
-          <hr class="style-eight"/>
-
-          <h4>2. FP is increasingly important</h4>
-          <hr class="style-eight"/>
-
-          <h4>3. JavaScript, FP fundamentals</h4>
-          <p>
-            <small>
-              lambdas / first-class functions<br>
-              pure functions, immutability, side effects<br>
-              partial application & curried functions<br>
-              function composition & pointfree style
-            </small>
-          </p>
-        </section>
-
-
-        <!-- * SLIDE 3 * -->
-        <section>
-          <h2>Dr. Boolean</h2>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/m3svKOdZijA?rel=0&amp;start=404" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          <p>
-            Brian Lonsdorf<br>
-            HTML5 Dev Conf, 2013
-          </p>
-          <p><small>
-            GitBook & Egghead IO videos: <a href="https://drboolean.gitbooks.io/mostly-adequate-guide">Mostly Adequate Guide to FP</a><br>
-            FE Masters Course: <a href="https://frontendmasters.com/courses/functional-javascript/">Hardcore FP in JS</a>
-          </small></p>
-
-          <aside class="notes">
-            <p>He skips the first point I'd like to make: FP in JS is not idomatic (prototype methods always mean data-first).</p>
-            <p>The larger point, however, is that small changes in syntax can make a dramatic, difference in how we fundamentally approach & solve problems in a language.</p>
-          </aside>
-        </section>
-
-
-        <!-- * SLIDE 4 * -->
+				<!-- *********** -->
 				<section>
           <h2>We Will Examine</h2>
           <ol>
-            <li>native JavaScript in FP-style</li>
+            <li>functional-style, native JavaScript</li>
             <li>functional JS libraries <small>(<a href="http://ramdajs.com/">ramda</a>, <a href="https://github.com/lodash/lodash/wiki/FP-Guide">lodash/fp</a>)</small></li>
             <li>a purely functional language <small>(<a href="http://elm-lang.org/">elm-lang</a>)</small></li>
           </ol>
           <hr class="style-eight"/>
 
-          <h2><em>NOT...</em></h2>
+          <h2><em>WE WILL NOT...</em></h2>
           <ol>
-            <li>merits/demerits of FP vs. OOP</li>
-            <li>in-depth explanations of basic FP concepts</li>
-            <li>category theory & fancy jargon</li>
+            <li>cover why FP is useful & important</li>
+            <li>learn functional programming, Ramda, or Elm</li>
+            <li>get into category theory & fancy jargon</li>
           </ol>
+
+					<aside class="notes">
+						<p>assume FP is useful and important</p>
+						<p>not the goal of this talk to go in depth on FP or category theory</p>
+					</aside>
         </section>
 
+				<!-- *********** -->
+				<!-- * SLIDE 3 * -->
+				<!-- *********** -->
 
-        <!-- * SLIDE 5 * -->
-        <section>
-          <h2>FP-style JavaScript</h2>
-          <p>Do some normal JS stuff here that shows flaw of prototype methods requiring data first</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// users = [{ ...user1 }, { ...user2 }, ...]
-users.filter(user => user.friends.length)
-  .forEach(friends => {
-    friends.filter(friend => friend.isActive)
-      .map(friend => friendTemplate(friend))
-  })
+				<!-- * 3A * -->
+				<section data-transition="slide-in fade-out">
+					<h2>First Thing's First</h2>
+					<p>Currying & Partial Application</p>
+
+<iframe class="ace" width=810 height=450 data-mode="javascript">
+const replace = (match, replacement, text) =>
+	text.replace(match, replacement)
+
+replace(/\s+/g, '-', 'forty two') // -> 'forty-two'
 </iframe>
-        </section>
+				</section>
 
+				<!-- * 3B * -->
+				<section data-transition="fade-in slide-out">
+					<h2>First Thing's First</h2>
+					<p>Not so scary after all.</p>
 
-        <!-- * SLIDE 5 * -->
-        <section>
-          <h2>FP-style JavaScript</h2>
-          <p>Do some basic stuff to get around flaw of OOP-pattern prototype methods</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Utils
-const partial = (fn, ...args) =>
-  fn.bind(null, ...args)
+<iframe class="ace" width=810 height=450 data-mode="javascript">
+// Currying
+const replace = match => replacement => text =>
+	text.replace(match, replacement)
 
-const reverse = fn => (...args) =>
-  fn.call(...args.reverse())
+// Partial application
+const replaceSpaces = replace(/\s+/g)
+const snakeCase = replaceSpaces('_')
+const kebabCase = replaceSpaces('-')
+const plusCase = replaceSpaces('+')
 
-const filter = reverse(Array.prototype.filter)
-
-// Contrived Example
-const isEven = x => !(x % 2)
-const filterOdds = partial(filter, isEven)
-// ...somewhere else
-filterOdds([ 1, 2, 4, 5, 6, 7, 7, 10, 12, 101]) // => [ 2, 4, 6, 10, 12 ]
+snakeCase('forty two') // -> 'forty_two'
+kebabCase('forty two') // -> 'forty-two'
+plusCase('forty two') // -> 'forty+two'
 </iframe>
+
+					<aside class="notes">
+						<p>Currying is just making a function take one argument at a time<br>
+							returning another function that takes in the next argument until<br>
+							we finally just execute the body.
+						</p>
+						<p>Partial application is the act of applying one of those arguments</p>
+						<p>You can see how it comes in useful when we want to reuse a function in a similar way several times</p>
+					</aside>
+				</section>
+
+				<!-- *********** -->
+				<!-- * SLIDE 4 * -->
+				<!-- *********** -->
+        <section>
+          <h2>Little Things, Big Woop</h2>
+					<p>Data Last</p>
+
+<iframe class="ace" width=810 height=400 data-mode="javascript">
+var firstTwoLetters = function(words) {
+	return _.map(words, function(word) {
+		return _.first(word, 2)
+	})
+}
+
+firstTwoLetters(['jim', 'kate']) // ['ji', 'ka']
+</iframe>
+
+					<p><small>
+						<i>"Hey Underscore, You're Doing It Wrong"</i><br>
+						Brian Lonsdorf, 2013
+					</small></p>
+
+					<aside class="notes">
+						<p>swap order of args for _.first so we can partially apply 2</p>
+						<p>outer function gets replaced with that expression</p>
+						<p>swap order of _.map and partially apply the partially applied _.first</p>
+						<p>outer function gets replaced with expression</p>
+						<p>we are left with a pointfree expression, so we don't need to name<br>
+							"words" and the function is more generic - remove "letters" from end of name</p>
+						<p>since we're left with such concise code, just use it inline</p>
+						<p>The takeaway is that small changes in syntax can make a dramatic<br>
+							difference in how we fundamentally approach & solve problems in a language.
+						</p>
+					</aside>
+        </section>
+
+				<!-- *********** -->
+				<!-- * SLIDE 5 * -->
+				<!-- *********** -->
+
+				<!-- * 5A * -->
+        <section>
+          <h2>Native JavaScript</h2>
+					<p><i>Data Last is <b>not idomatic</b> in JavaScript!</i></p>
+
+<iframe class="ace" width=810 height=400 data-mode="javascript">
+"don't panic!".replace("don't ", '') // -> 'panic!'
+
+[1, 2, 3].map(x => x + 1) // -> [2, 3, 4]
+
+const data = { answer: 42, question: undefined }
+
+data.hasOwnProperty('answer') // -> true
+
+data['answer'] // -> 42
+
+data.answer.toString() // -> '42'
+</iframe>
+
+					<aside class="notes">
+						<p>Furthermore, JavaScript uses inheritance, so many of the most common<br>
+							functions we use are methods on the prototype and inherently require<br>
+							data-first in order to use idiomatically.
+						</p>
+					</aside>
         </section>
 
 
-        <!-- * SLIDE 6 * -->
+				<!-- * 5B * -->
         <section>
-          <h2>FP-style JavaScript</h2>
-          <p>Show how quickly it becomes overly complex.</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Simple curry
-const simpleCurry = (fn, args = []) =>
-  args.length < fn.length
-    ? x => simpleCurry(fn, args.concat([x]))
-    : fn.apply(null, args)
+          <h2>Native JavaScript</h2>
+					<p>What do you mean, <i><b>not idomatic</b>?</i></p>
+
+<iframe class="ace" width=810 height=400 data-mode="javascript">
+const reverse = fn => (...args) => fn.call(...args.reverse())
 
 // NOTE: arity param needed for prototype methods (fn.length is undefined)
 const curry = (fn, arity = fn.length, args = []) =>
@@ -139,115 +174,295 @@ const curry = (fn, arity = fn.length, args = []) =>
     ? x => curry(fn, arity, args.concat([x]))
     : fn.apply(null, args)
 </iframe>
+
+					<aside class="notes">
+						<p>This is my attempt at reverse and curry functions.<p>
+						<p>It's not important to understand what's going on here, but you<br>
+							can see that it's rather crazy, and I want to point out that JS<br>
+							even makes it extra difficult by not giving these methods proper<br>
+							arity (function.length) which we need in order to know when to<br>
+							stop returning new functions and actualy execute.</p>
+					</aside>
         </section>
 
 
+				<!-- * 5C * -->
+        <section>
+          <h2>Native JavaScript</h2>
+					<p>Fixing the prototype problem.</p>
+
+<iframe class="ace" width=810 height=400 data-mode="javascript">
+const replace = curry(reverse(String.prototype.replace), 3)
+replace('')("don't ")("don't panic!") // -> 'panic!'
+
+const map = curry(reverse(Array.prototype.map), 2)
+map(x => x + 1)([1, 2, 3]) // -> [2, 3, 4]
+
+const data = { answer: 42, question: undefined }
+const hasOwnProperty = curry(reverse(Object.prototype.hasOwnProperty), 2)
+hasOwnProperty('answer')(data) // -> true
+
+const prop = prop => obj => obj[prop]
+prop('answer')(data) // -> 42
+
+const toString = n => Number.prototype.toString.call(n)
+toString(data.answer) // -> '42'
+</iframe>
+
+					<p>Ugly butt syntax! :(</p>
+
+					<aside class="notes">
+						<p>This is clearly not how JS was meant to be used.</p>
+					</aside>
+	      </section>
+
+				<!-- *********** -->
+				<!-- * SLIDE 6 * -->
+				<!-- *********** -->
+				<!-- * Contrived Example * -->
+
+				<!-- * 6A * -->
+	      <section data-transition="slide-in fade-out">
+	        <h2>Native JavaScript</h2>
+	        <p>A contrived example...</p>
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [
+	{ name: 'Trillian McMillan', species: 'Human' },
+	{ name: 'Arthur Dent', species: 'Human' },
+	{ name: 'Zaphod Beeblebrox', species: 'Betelgeusian' }
+]
+
+users.map(user => `Don't panic, ${user.name}!`)
+
+// -> ["Don't panic, Trillian McMillan!",
+//     "Don't panic, Arthur Dent!",
+//     "Don't panic, Zaphod Beeblebrox!"]
+</iframe>
+	      </section>
+
+
+				<!-- * 6B * -->
+	      <section data-transition="fade">
+	        <h2>Native JavaScript</h2>
+	        <p>...just for humans, please</p>
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [
+	{ name: 'Trillian McMillan', species: 'Human' },
+	{ name: 'Arthur Dent', species: 'Human' },
+	{ name: 'Zaphod Beeblebrox', species: 'Betelgeusian' }
+]
+
+users.filter(user => user.species === 'Human')
+	.map(user => `Don't panic, ${user.name}!`)
+
+// -> ["Don't panic, Trillian McMillan!", "Don't panic, Arthur Dent!"]
+</iframe>
+	      </section>
+
+
+				<!-- * 6C * -->
+	      <section data-transition="fade">
+	        <h2>Native JavaScript</h2>
+	        <p>...it's too long for mobile. Abbreviate it.</p>
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [
+	{ name: 'Trillian McMillan', species: 'Human' },
+	{ name: 'Arthur Dent', species: 'Human' },
+	{ name: 'Zaphod Beeblebrox', species: 'Betelgeusian' }
+]
+
+users.filter(user => user.species === 'Human')
+	.map(user => user.name.split(' ').map(part => part[0].toUpperCase()).join(''))
+	.map(name => `Don't panic, ${name}!`)
+
+// -> ["Don't panic, TM!", "Don't panic, AD!"]
+</iframe>
+	      </section>
+
+
+				<!-- * 6D * -->
+	      <section data-transition="fade">
+	        <h2>Native JavaScript</h2>
+	        <p>Refactor into small, reuseable, composable parts</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [ /* ... */ ]
+
+const isHuman = user => user.species === 'Human'
+
+const abbreviate = user =>
+	user.name.split(' ')
+		.map(part => part[0].toUpperCase())
+		.join('')
+
+const advise = name => `Don't panic, ${name}!`
+
+const adviseHumans = users =>
+	users.filter(isHuman).map(abbreviate).map(advise)
+
+adviseHumans(users)
+// -> ["Don't panic, TM!", "Don't panic, AD!"]
+</iframe>
+	      </section>
+
+
+				<!-- * 6E * -->
+	      <section data-transition="fade">
+	        <h2>Native JavaScript</h2>
+	        <p>Oh, no! The big O. Let's compose that.</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [ /* ... */ ]
+
+const isHuman = user => user.species === 'Human'
+
+const abbreviate = user =>
+	user.name.split(' ')
+		.map(part => part[0].toUpperCase())
+		.join('')
+
+const advise = name => `Don't panic, ${name}!`
+
+const adviseHumans = users =>
+	users.filter(isHuman).map(user => advise(abbreviate(user)))
+
+adviseHumans(users)
+// -> ["Don't panic, TM!", "Don't panic, AD!"]
+</iframe>
+	      </section>
+
+
+        <!-- * 6F * -->
+				<section data-transition="fade-in slide-out">
+					<h2>Native JavaScript</h2>
+					<p>With our curried, data-last utils...</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [ /* ... */ ]
+
+const getHumans = filter(user => user.species === 'Human')
+
+const abbreviate = user =>
+	map(part => join('')(map(toUpperCase(part[0]))))(split(' ')(prop('name')(user)))
+
+const advise = name => `Don't panic, ${name}!`
+
+const adviseHumans = users =>
+	map(user => advise(abbreviate(user)))(getHumans(users))
+
+adviseHumans(users)
+// -> ["Don't panic, TM!", "Don't panic, AD!"]
+</iframe>
+					<p>So much ugly butt. I can't even look</p>
+				</section>
+
+				<!-- *********** -->
         <!-- * SLIDE 7 * -->
+				<!-- *********** -->
         <section>
           <h2>FP Libraries</h2>
-          <p>Show how Ramda and lodash/fp can help.</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Some code here
+          <p>Ramda (or lodash/fp) to the rescue!</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const users = [ /* ... */ ]
+
+const getHumans = R.filter(R.compose(R.equals('Human'), R.prop('species')))
+
+const abbreviate =
+	R.compose(R.join(''), R.map(R.compose(R.toUpper, R.head)), R.split(' '), R.prop('name'))
+
+const advise = name => `Don't panic, ${name}!`
+
+const adviseHumans = R.compose(R.map(R.compose(advise, abbreviate)), getHumans)
+
+adviseHumans(users)
+// -> ["Don't panic, TM!", "Don't panic, AD!"]
 </iframe>
+
+					<p>...but wait, wut?</p>
+
+					<aside class="notes">
+						<p>Are we still looking at JavaScript?</p>
+						<p>Quickly becomes verbose and cluttered with parens--even without the "_."</p>
+					</aside>
         </section>
 
-
+				<!-- *********** -->
         <!-- * SLIDE 8 * -->
-        <section>
-          <h2>FP Libraries</h2>
-          <p>Show how even with FP Libraries, the code quickly becomes ugly, verbose, and cluttered with parens and such.</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Some code here
-</iframe>
-        </section>
-
-
-        <!-- * SLIDE 9 * -->
-        <section>
+				<!-- *********** -->
+				<section>
           <h2>Elm</h2>
-          <p>Ahhhh...</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Some code here
+          <p>Ahhhh... :)</p>
+
+<iframe class="ace" width=810 height=400 data-mode="elm">
+users =
+	[ { name = "Trillian McMillan", species = "Human" }
+	, { name = "Zaphod Beeblebrox", species = "Betelgeusian" }
+	, { name = "Arthur Dent", species = "Human" }
+	]
+
+getHumans = filter <| (==) "Human" << .species
+
+abbreviate = join "" << (map <| toUpper << left 1) << split " " << .name
+
+advise name = "Don't panic, " ++ name ++ "!"
+
+adviseHumans = (map <| advise << abbreviate) << getHumans
+
+adviseHumans users
+-- -> ["Don't panic, TM!", "Don't panic, AD!"]
 </iframe>
+
           <aside class="notes">
-            Everything is curried. Everything is a function, so no need for parens.
+            <p>Everything is curried. Everything is a function, so no need for parens.<p>
+						<p>Maybe is returned, no need to manualy wrap result.</p>
+						<p>Compose & pipe infix operators.</p>
+						<p>Infix operators are curryable functions</p>
           </aside>
         </section>
 
+				<!-- *********** -->
+				<!-- * SLIDE 9 * -->
+				<!-- *********** -->
+				<section>
+					<h2>Recap</h2>
+					<hr class="style-eight"/>
+					<ol>
+						<li>Small changes, but BIG woop!</li>
+						<li>Much of FP is not idomatic in JS</li>
+						<li>Libraries can only help so much</li>
+						<li>Purpose for syntax <del>chafe</del> change</li>
+					</ol>
+					<hr class="style-eight"/>
+					<h3>Thank you!</h3>
+				</section>
 
-        <!-- * SLIDE 10 * -->
-        <section>
-          <h2>Elm</h2>
-          <p>In addition to simpler syntax, we can parially apply infix operators, getting a prop is a composable function, and other neat stuff!</p>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-// Some code here
-</iframe>
-        </section>
-
-        <!-- ************ -->
-        <!-- * EXAMPLES * -->
-        <!-- ************ -->
-        <section>
-          <h1>Headers, List Example</h1>
-          <h2>Level 2</h2>
-          <h3>Level 3</h3>
-          <ul>
-            <li>Something in a list</li>
-            <li>Another thing in a list</li>
-          </ul>
-          <p>Here is a <a href="#">paragraph of text</a> with a link.</p>
-        </section>
-
-        <section>
-          <h2>Code Snippet Example</h2>
-<iframe class="ace" width=800 height=400 data-mode="javascript">
-const partial = (fn, ...args) => {
-  return fn.bind(null, ...args)
-}
-
-const reverse = fn => (...args) =>
-fn.call(...args.reverse())
-
-// NOTE: arity is needed since prototype methods dont have proper length
-const curry = (fn, arity = fn.length, args = []) =>
-args.length < arity
-? x => curry(fn, arity, args.concat([x]))
-: fn.apply(null, args)
-</iframe>
-        </section>
-
-        <section>
-    			<section>
-            <h2>Vertical Slide Example (1)</h2>
-          </section>
-    			<section>
-            <h2>Vertical Slide Example (2)</h2>
-          </section>
-    		</section>
-
-        <section>
-          <h1>Image Example</h1>
-          <image alt="code" src="./images/code.png"/>
-        </section>
-
-
-        <!-- ********** -->
-        <!-- * UNUSED * -->
-        <!-- ********** -->
-
-        <!-- <section>
-          <h2>FP (in JS) === <em>Trending</em></h2>
-          <p>
-            google <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
-              says so
-            </a>
-          </p>
-          <p>
-            so many <a href="https://trends.google.com/trends/explore?date=2012-01-01%202018-02-11&q=functional%20javascript">
-              articles
-            </a>
-          </p>
-        </section> -->
+				<!-- ************ -->
+				<!-- * SLIDE 10 * -->
+				<!-- ************ -->
+				<section>
+					<h2>Resources</h2>
+					<hr class="style-eight"/>
+					<ol class="resources-list">
+						<li><a href="https://medium.com/@cscalfani/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536">So You Want to be a Functional programmer?</a> (6 part article), Charles Scalfani</li>
+						<li><a href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8">Curry or Partial Application</a> (article), Eric Elliot</li>
+						<li><a href="https://www.youtube.com/watch?v=m3svKOdZijA">Hey Underscore, You're Doing It Wrong</a> (Video), Brian Lonsdorf</li>
+						<li><a href="https://drboolean.gitbooks.io/mostly-adequate-guide">Mostly Adequate Guide to FP</a> (GitBook), Brian Lonsdorf</li>
+						<li><a href="https://egghead.io/courses/professor-frisby-introduces-composable-functional-javascript">Professor Frisby Introduces...Functional JS</a>, (Egghead.io video) Brian Lonsdorf</li>
+						<li><a href="https://frontendmasters.com/courses/functional-javascript/">Hardcore FP in JS</a> (FE Masters Course), Brian Lonsdorf</li>
+						<li><a href="http://ramdajs.com/">Ramda</a> - try out the REPL</li>
+						<li><a href="http://randycoulman.com/blog/2016/05/24/thinking-in-ramda-getting-started/">Thinking in Ramda</a> (article), Randy Coulman</li>
+						<li><a href="https://github.com/lodash/lodash/wiki/FP-Guide">lodash/fp</a></li>
+						<li><a href="http://elm-lang.org/">elm-lang.org</a> REPL, Docs, etc.</li>
+						<li><a href="https://guide.elm-lang.org/">Intro to Elm</a> (Guidebook)</li>
+						<li><a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">Let's be Mainstream</a> (video), Evan Czaplicki</li>
+						<li><a href="https://www.youtube.com/watch?v=zBHB9i8e3Kc">Intro to Elm</a> (video), Richard Feldman</li>
+						<li><a href="https://frontendmasters.com/courses/elm/">Elm FE Masters Course</a>, Richard Feldman</li>
+						<li><a href="https://www.youtube.com/watch?v=DoA4Txr4GUs">Scaling Elm Apps</a> (video), Richard Feldman</li>
+						<li><a href="https://www.youtube.com/watch?v=XpDsk374LDE">The life of a file</a> (video), Evan Czaplicki</li>
+						<li><a href="http://elm-lang.org/community">Elm Community</a> Slack, Reddit, Meetups, etc.</li>
+					</ol>
+				</section>
 			</div>
 		</div>
 		<script src="./node_modules/reveal.js/js/reveal.js"></script>

@@ -116,7 +116,7 @@ Reveal.initialize({
   display: 'block',
 
   ace: {
-    theme: 'ace/theme/ambiance',
+    theme: 'ace/theme/ambiance', // textmate ambiance
     mode: 'javascript',
     fontSize: '16pt',
     showPrintMargin: false,

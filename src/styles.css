@@ -3,6 +3,33 @@ body {
   background-color: #fff;
 }
 
+#sdg-slide-template {
+	z-index:-999;
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+}
+
+#sdg-slide-template svg {
+	z-index:-999;
+	display: inline-block;
+}
+
+#sdg-slide-template span {
+	z-index:-999;
+	font-family: 'TradeGothicLTPro-Bd2',sans-serif;
+	color: #aaa;
+	display: inline-block;
+	position: relative;
+	bottom: 20px;
+}
+
+#sdg-slide-template b {
+	z-index:-999;
+	font-weight: bold;
+	color: #1864b3;
+}
+
 .reveal {
   color: #538ca0;
 }

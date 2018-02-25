@@ -46,7 +46,7 @@
           <h2><em>WE WILL NOT...</em></h2>
           <ol>
             <li>cover why FP is useful & important</li>
-            <li>learn functional programming, Ramda, or Elm</li>
+            <li>learn FP, Ramda, or Elm</li>
             <li>get into category theory & fancy jargon</li>
           </ol>
 
@@ -65,7 +65,7 @@
 					<h2>First Thing's First</h2>
 					<p>Currying & Partial Application</p>
 
-<iframe class="ace" width=810 height=450 data-mode="javascript">
+<iframe class="ace" width=810 height=350 data-mode="javascript">
 const replace = (match, replacement, text) =>
 	text.replace(match, replacement)
 
@@ -78,7 +78,7 @@ replace(/\s+/g, '-', 'forty two') // -> 'forty-two'
 					<h2>First Thing's First</h2>
 					<p>Not so scary after all.</p>
 
-<iframe class="ace" width=810 height=450 data-mode="javascript">
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 // Currying
 const replace = match => replacement => text =>
 	text.replace(match, replacement)
@@ -111,7 +111,7 @@ plusCase('forty two') // -> 'forty+two'
           <h2>Little Things, Big Woop</h2>
 					<p>Data Last</p>
 
-<iframe class="ace" width=810 height=400 data-mode="javascript">
+<iframe class="ace" width=810 height=350 data-mode="javascript">
 var firstTwoLetters = function(words) {
 	return _.map(words, function(word) {
 		return _.first(word, 2)
@@ -149,18 +149,15 @@ firstTwoLetters(['jim', 'kate']) // ['ji', 'ka']
           <h2>Native JavaScript</h2>
 					<p><i>Data Last is <b>not idomatic</b> in JavaScript!</i></p>
 
-<iframe class="ace" width=810 height=400 data-mode="javascript">
+<iframe class="ace" width=810 height=350 data-mode="javascript">
 "don't panic!".replace("don't ", '') // -> 'panic!'
+
 
 [1, 2, 3].map(x => x + 1) // -> [2, 3, 4]
 
+
 const data = { answer: 42, question: undefined }
-
-data.hasOwnProperty('answer') // -> true
-
 data['answer'] // -> 42
-
-data.answer.toString() // -> '42'
 </iframe>
 
 					<aside class="notes">
@@ -171,16 +168,15 @@ data.answer.toString() // -> '42'
 					</aside>
         </section>
 
-
 				<!-- * 5B * -->
         <section>
           <h2>Native JavaScript</h2>
-					<p>What do you mean, <i><b>not idomatic</b>?</i></p>
+					<p>Fixing the prototype problem.</p>
 
-<iframe class="ace" width=810 height=400 data-mode="javascript">
+<iframe class="ace" width=810 height=350 data-mode="javascript">
 const reverse = fn => (...args) => fn.call(...args.reverse())
 
-// NOTE: arity param needed for prototype methods (fn.length is undefined)
+// NOTE: fn.length is undefined for prototype methods
 const curry = (fn, arity = fn.length, args = []) =>
   args.length < arity
     ? x => curry(fn, arity, args.concat([x]))
@@ -197,35 +193,48 @@ const curry = (fn, arity = fn.length, args = []) =>
 					</aside>
         </section>
 
-
 				<!-- * 5C * -->
         <section>
           <h2>Native JavaScript</h2>
 					<p>Fixing the prototype problem.</p>
 
-<iframe class="ace" width=810 height=400 data-mode="javascript">
+<iframe class="ace" width=810 height=350 data-mode="javascript">
 const replace = curry(reverse(String.prototype.replace), 3)
 replace('')("don't ")("don't panic!") // -> 'panic!'
+
 
 const map = curry(reverse(Array.prototype.map), 2)
 map(x => x + 1)([1, 2, 3]) // -> [2, 3, 4]
 
-const data = { answer: 42, question: undefined }
-const hasOwnProperty = curry(reverse(Object.prototype.hasOwnProperty), 2)
-hasOwnProperty('answer')(data) // -> true
 
 const prop = prop => obj => obj[prop]
-prop('answer')(data) // -> 42
-
-const toString = n => Number.prototype.toString.call(n)
-toString(data.answer) // -> '42'
+prop('answer')({ answer: 42 }) // -> 42
 </iframe>
 
-					<p>Ugly butt syntax! :(</p>
+					<p>Ugly butt syntax!</p>
 
 					<aside class="notes">
 						<p>This is clearly not how JS was meant to be used.</p>
 					</aside>
+	      </section>
+
+				<!-- * 5D * -->
+        <section>
+          <h2>Native JavaScript</h2>
+					<p>Fixing the prototype problem... with Ramda.</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+// replace('')("don't ")("don't panic!")
+R.replace("don't ", '', "don't panic!") // -> 'panic!'
+
+
+// map(x => x + 1)([1, 2, 3])
+R.map(x => x + 1, [1, 2, 3]) // -> [2, 3, 4]
+
+
+// prop('answer')({ answer: 42 })
+R.prop('answer', { answer: 42 }) // -> 42
+</iframe>
 	      </section>
 
 				<!-- *********** -->
@@ -297,7 +306,7 @@ users.filter(user => user.species === 'Human')
 	        <h2>Native JavaScript</h2>
 	        <p>Refactor into small, reuseable, composable parts</p>
 
-<iframe class="ace" width=810 height=350 data-mode="javascript">
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 const users = [ /* ... */ ]
 
 const isHuman = user => user.species === 'Human'
@@ -323,7 +332,7 @@ adviseHumans(users)
 	        <h2>Native JavaScript</h2>
 	        <p>Oh, no! The big O. Let's compose that.</p>
 
-<iframe class="ace" width=810 height=350 data-mode="javascript">
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 const users = [ /* ... */ ]
 
 const isHuman = user => user.species === 'Human'
@@ -349,7 +358,7 @@ adviseHumans(users)
 					<h2>Native JavaScript</h2>
 					<p>With our curried, data-last utils...</p>
 
-<iframe class="ace" width=810 height=350 data-mode="javascript">
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 const users = [ /* ... */ ]
 
 const getHumans = filter(user => user.species === 'Human')
@@ -365,7 +374,7 @@ const adviseHumans = users =>
 adviseHumans(users)
 // -> ["Don't panic, TM!", "Don't panic, AD!"]
 </iframe>
-					<p>So much ugly butt. I can't even look</p>
+					<p>So much ugly butt!</p>
 				</section>
 
 				<!-- *********** -->
@@ -375,7 +384,7 @@ adviseHumans(users)
           <h2>FP Libraries</h2>
           <p>Ramda (or lodash/fp) to the rescue!</p>
 
-<iframe class="ace" width=810 height=350 data-mode="javascript">
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 const users = [ /* ... */ ]
 
 const getHumans = R.filter(R.compose(R.equals('Human'), R.prop('species')))

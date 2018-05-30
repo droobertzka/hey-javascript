@@ -54,7 +54,7 @@ iframe.ace {
   margin: 15px 0;
 }
 
-hr.hr-lambda {
+.lambda, hr.hr-lambda {
     overflow: visible; /* For IE */
     padding: 0;
     border: none;
@@ -64,7 +64,7 @@ hr.hr-lambda {
     margin: 60px 60px 30px;
 }
 
-hr.hr-lambda:after {
+.lambda:after, hr.hr-lambda:after {
     content: "\03BB";
     display: inline-block;
     position: relative;
@@ -75,6 +75,21 @@ hr.hr-lambda:after {
 
 hr.hr-lambda--short {
   margin: 45px 60px 15px;
+}
+
+.lambda.lambda--large:after {
+  display:block;
+  top: auto;
+  font-size: 6em;
+  color: #538ca0;
+}
+
+.lambda.lambda--start:after {
+  content: "\003C\03BB\003E";
+}
+
+.lambda.lambda--end:after {
+  content: "\003C/\03BB\003E";
 }
 
 .g-trends iframe {

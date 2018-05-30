@@ -54,7 +54,7 @@ iframe.ace {
   margin: 15px 0;
 }
 
-hr.style-eight {
+hr.hr-lambda {
     overflow: visible; /* For IE */
     padding: 0;
     border: none;
@@ -64,7 +64,7 @@ hr.style-eight {
     margin: 60px 60px 30px;
 }
 
-hr.style-eight:after {
+hr.hr-lambda:after {
     content: "\03BB";
     display: inline-block;
     position: relative;
@@ -73,12 +73,28 @@ hr.style-eight:after {
     background: white;
 }
 
+hr.hr-lambda--short {
+  margin: 45px 60px 15px;
+}
+
 .g-trends iframe {
   height: 35%;
   min-height: 350px;
   max-width: 600px;
 }
 
+.reveal p.vertical-spacing {
+  margin: 2.2em 0 3em;
+}
+
 .resources-list li {
 	font-size: .5em;
+}
+
+ul li {
+  list-style: none;
+}
+
+.reveal p.short {
+  margin: 5px 0 0;
 }

@@ -26,9 +26,9 @@
 				<!-- * Title * -->
 				<section>
           <h1>Hey Javascript, You're Doing it Wrong</h1>
-          <hr class="style-eight"/>
+          <hr class="hr-lambda hr-lambda--short"/>
           <p>by Andrew Barrette</p>
-          <p><small>February 2018</small></p>
+          <p><small>May 2018</small></p>
         </section>
 
 				<!-- *********** -->
@@ -37,24 +37,172 @@
 				<section>
           <h2>We Will Examine</h2>
           <ol>
-            <li>functional-style, native JavaScript</li>
+            <li style="width:110%;">functional-style, native JavaScript</li>
             <li>functional JS libraries <small>(<a href="http://ramdajs.com/">ramda</a>, <a href="https://github.com/lodash/lodash/wiki/FP-Guide">lodash/fp</a>)</small></li>
-            <li>a purely functional language <small>(<a href="http://elm-lang.org/">elm-lang</a>)</small></li>
+            <li>pure functional language <small>(<a href="http://elm-lang.org/">elm-lang</a>)</small></li>
           </ol>
-          <hr class="style-eight"/>
+          <hr class="hr-lambda"/>
 
           <h2><em>WE WILL NOT...</em></h2>
           <ol>
-            <li>cover why FP is useful & important</li>
+            <li>compare FP vs. OOP</li>
             <li>learn FP, Ramda, or Elm</li>
-            <li>get into category theory & fancy jargon</li>
+            <li style="width:110%;">get into category theory & fancy jargon</li>
           </ol>
 
 					<aside class="notes">
-						<p>assume FP is useful and important</p>
+						<p>briefly touch on why it's important to learn FP</p>
 						<p>not the goal of this talk to go in depth on FP or category theory</p>
 					</aside>
+				</section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2>Why learn FP?</h2>
+					<hr class="hr-lambda"/>
+					<p class="vertical-spacing">academic ⟶ useable ⟶ practical ⟶ advantageous<sup><small>1</small></sup></p>
+					<hr class="hr-lambda"/>
+					<small><em>1. this discussion not included (see next slide)</em></small>
+				</section>
+				
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2>Behold, the power!</h2>
+					<hr class="hr-lambda"/>
+					<p>composition over inheritance</p>
+					<p>referential transparency, immutability, side effects</p> 
+					<p>category theory, monads, maybes & eithers</p> 
+					<p>first-class functions, recursion, partial application</p>
+					<p style="padding-top: 1em;"><small><em>* jargon warning! *</em></small></p>
         </section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2>Stay interesting, my friends</h2>
+          <hr class="hr-lambda"/>
+					<p>Object Oriented Programming</p>
+					<p>Functional Programming</p>
+					<hr class="hr-lambda"/>
+					<h3><em>Learning new things is good</em></h3>
+        </section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2><em>Actually, Many Paradigms</em></h2>
+					<hr class="hr-lambda"/>
+					<p><small>Action, Agent-oriented, Array-oriented, Automata-based, Concurrent computing, Relativistic programming, Data-driven, Declarative, Functional, Purely functional, Logic, Abductive logic, Answer set, Concurrent logic, Functional logic, Inductive logic, Constraint, Constraint logic, Concurrent constraint logic, Dataflow, Flow-based, Cell-oriented, Reactive, Dynamic/scripting, Event-driven, Service-oriented, Time-driven, Function-level, Point-free style, Concatenative, Generic, Imperative, Procedural, Object-oriented, Literate, Language-oriented, Natural-language programming, Discipline-specific, Domain-specific, Grammar-oriented, Intentional, Metaprogramming, Automatic, Inductive programming, Reflective, Attribute-oriented, Homoiconic, Macro, Template, Non-structured, Array, Nondeterministic, Parallel computing, Process-oriented, Probabilistic, Stack-based, Structured, Block-structured, Modular, Actor-based, Class-based, Concurrent, Prototype-based, Aspect-oriented, Role-oriented, Subject-oriented, Recursive, Value-level, Quantum programming</small></p>
+        </section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2><em>...OOP & FP Are Subsets</em></h2>
+					<hr class="hr-lambda"/>
+					<ul>
+						<li>Imperative
+							<ul>
+								<li>↳ <em>Procedural</em></li>
+								<li>↳ <strong>Object Oriented</strong></li>
+							</ul>
+						</li>
+						<li>Declarative
+							<ul>
+								<li>↳ <em>Constraint programming</em></li>
+								<li>↳ <em>Dataflow programming</em></li>
+								<li>↳ <strong>Functional</strong></li>
+								<li>↳ <em>Logic programming</em></li>
+							</ul>
+						</li>
+					</ul>
+        </section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2><em>...Multi-Paradigm</em></h2>
+					<hr class="hr-lambda"/>
+					<div class="lists--inline">
+						<ul>
+							<li>C++</li>
+							<li>C#</li>
+							<li>Lisp</li>
+							<li>F#</li>
+						</ul>
+						<ul>
+							<li>Java 8+</li>
+							<li><strong>JavaScript</strong></li>
+							<li>Kotlin</li>
+							<li>Perl</li>
+						</ul>
+						<ul class="list--right">
+							<li>OCaml</li>
+							<li>PHP</li>
+							<li>Python</li>
+							<li>Ruby</li>
+						</ul>
+						<ul>
+							<li>Rust</li>
+							<li>Scala</li>
+							<li>Swift</li>
+							<li>VB .NET</li>
+						</ul>
+					</div>
+					<hr class="hr-lambda"/>
+					<h3>Object Oriented <em>and&nbsp;</em> Functional</h3>
+        </section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<!--
+				<section>
+					<h2>Multi-Paradigm</h2>
+					<hr class="hr-lambda"/>
+					<p><b>JavaScript</b>: Imperative, Object Oriented, <br>Functional, but not Declarative</p>
+					<hr class="hr-lambda"/>
+					<h3><em>Learn both</em></h3>
+				</section>
+				-->
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<section>
+					<h2>Learn FP!</h2>
+					<hr class="hr-lambda"/>
+					<h3 style="margin-bottom: 0;">1. In your language</h3>
+						<p class="short">it will get ugly, that's OK</p>
+						<p class="short">the temptation will be strong</p>
+					<h3 style="padding-top: .8em; margin-bottom: 0">2. In a pure FP language</h3>
+						<p class="short">very unfamiliar, that's OK</p>
+						<p class="short">there's no escape</p>
+				</section>
+
+				<!-- *********** -->
+        <!-- * SLIDE # * -->
+				<!-- *********** -->
+				<!--
+				<section>
+					<h2>FP Fundamentals</h2>
+					<hr class="hr-lambda"/>
+					<ul>
+						<li><b>Functions</b>: our fundamental building blocks</li>
+						<li><b>Composition</b>: how we combine & arrange logic</li>
+						<li><b>Data last</b>: compose logic, then pass data through</li>
+						<li><b>Currying & partial application</b>: make it all easier</li>
+					</ul>
+				</section>
+				-->
 
 				<!-- *********** -->
 				<!-- * SLIDE 3 * -->
@@ -76,7 +224,7 @@ replace(/\s+/g, '-', 'forty two') // -> 'forty-two'
 				<!-- * 3B * -->
 				<section data-transition="fade-in slide-out">
 					<h2>First Thing's First</h2>
-					<p>Not so scary after all.</p>
+					<p>Not so scary after all</p>
 
 <iframe class="ace" width=810 height=400 data-mode="javascript">
 // Currying
@@ -122,7 +270,7 @@ firstTwoLetters(['jim', 'kate']) // ['ji', 'ka']
 </iframe>
 
 					<p><small>
-						<i>"Hey Underscore, You're Doing It Wrong"</i><br>
+						<em>"Hey Underscore, You're Doing It Wrong"</em><br>
 						Brian Lonsdorf, 2013
 					</small></p>
 
@@ -147,17 +295,21 @@ firstTwoLetters(['jim', 'kate']) // ['ji', 'ka']
 				<!-- * 5A * -->
         <section>
           <h2>Native JavaScript</h2>
-					<p><i>Data Last is <b>not idomatic</b> in JavaScript!</i></p>
+					<p><em>Data Last is <b>not idomatic</b> in JavaScript</em></p>
 
 <iframe class="ace" width=810 height=350 data-mode="javascript">
 "don't panic!".replace("don't ", '') // -> 'panic!'
 
-
 [1, 2, 3].map(x => x + 1) // -> [2, 3, 4]
 
-
-const data = { answer: 42, question: undefined }
+const data = {
+	question: 'Life, the universe, & everything',
+	answer: 42
+}
 data['answer'] // -> 42
+
+const n = 5
+n === 42 // -> false
 </iframe>
 
 					<aside class="notes">
@@ -171,72 +323,146 @@ data['answer'] // -> 42
 				<!-- * 5B * -->
         <section>
           <h2>Native JavaScript</h2>
-					<p>Fixing the prototype problem.</p>
+					<p>Data-last & curry all the things</p>
 
 <iframe class="ace" width=810 height=350 data-mode="javascript">
-const reverse = fn => (...args) => fn.call(...args.reverse())
+// String.prototype.replace
+const replace = match => replacement => text =>
+	text.replace(match, replacement)
 
-// NOTE: fn.length is undefined for prototype methods
-const curry = (fn, arity = fn.length, args = []) =>
-  args.length < arity
-    ? x => curry(fn, arity, args.concat([x]))
-    : fn.apply(null, args)
+// Array.prototype.map
+const map = fn => arr => arr.map(fn)
+
+// Bracket notation
+const prop = key => obj => obj[key]
+
+// Equals 
+const equals = first => second => first === second
 </iframe>
 
 					<aside class="notes">
-						<p>This is my attempt at reverse and curry functions.<p>
-						<p>It's not important to understand what's going on here, but you<br>
-							can see that it's rather crazy, and I want to point out that JS<br>
-							even makes it extra difficult by not giving these methods proper<br>
-							arity (function.length) which we need in order to know when to<br>
-							stop returning new functions and actualy execute.</p>
 					</aside>
         </section>
 
 				<!-- * 5C * -->
         <section>
           <h2>Native JavaScript</h2>
-					<p>Fixing the prototype problem.</p>
+					<p>Data-last & curry all the things</p>
 
 <iframe class="ace" width=810 height=350 data-mode="javascript">
-const replace = curry(reverse(String.prototype.replace), 3)
+// "don't panic!".replace("don't ", '') -> 'panic!'
 replace('')("don't ")("don't panic!") // -> 'panic!'
 
-
-const map = curry(reverse(Array.prototype.map), 2)
+// [1, 2, 3].map(x => x + 1) -> [2, 3, 4]
 map(x => x + 1)([1, 2, 3]) // -> [2, 3, 4]
 
+// data['answer'] -> 42
+prop('answer')(data) // -> 42
 
-const prop = prop => obj => obj[prop]
-prop('answer')({ answer: 42 }) // -> 42
+// n === 42 -> false
+equals(42)(n) // -> false
 </iframe>
 
-					<p>Ugly butt syntax!</p>
+					<p><em>What the ugly butt syntax?!</em></p>
 
 					<aside class="notes">
 						<p>This is clearly not how JS was meant to be used.</p>
 					</aside>
 	      </section>
 
+				<!-- * 5B * -->
+        <section>
+					<h2>Native JavaScript</h2>
+					<p>We can do better than that</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const dataLast = fn => (...args) => fn.call(args.pop(), ...args)
+
+// NOTE: fn.length needs to be incremented for prototype methods
+const curry = (fn, arity = fn.length, args = []) =>
+	args.length < arity
+		? (...nextArgs) => curry(fn, arity, args.concat(nextArgs))
+		: fn.apply(null, args)
+</iframe>
+
+					<aside class="notes">
+						<p>This is my attempt at reverse and curry functions.<p>
+						<p>It's not important to understand what's going on here, but you<br>
+							can see that it's rather crazy, and I want to point out that it's<br>
+							even a bit extra difficult since the arity (function.length) of these<br>
+							methods needs to be specified so know when to<br>
+							stop returning new functions and actualy execute.</p>
+					</aside>
+        </section>
+
+				<!-- * 5B * -->
+        <section>
+          <h2>Native JavaScript</h2>
+					<p>Have it your way</p>
+
+<iframe class="ace" width=810 height=350 data-mode="javascript">
+const replace = curry(dataLast(String.prototype.replace), 3)
+replace("don't ")('')("don't panic!") // -> 'panic!'
+replace("don't", '')("don't panic!") // -> 'panic!'
+replace("don't", '', "don't panic!") // -> 'panic!'
+replace("don't")('', "don't panic!") // -> 'panic!'
+
+// const map = curry(dataLast(Array.prototype.map), 2)
+map(x => x + 1, [1, 2, 3]) // -> [2, 3, 4]
+
+// const prop = curry((key, obj) => obj.key)
+prop('answer', { answer: 42 }) // -> 42
+
+// const equals = curry((first, second) => first === second)
+equals(42, n) // -> false
+</iframe>
+
+					<aside class="notes">
+						<p>Yay! no more ugly butt syntax</p>
+					</aside>
+				</section>
+
 				<!-- * 5D * -->
         <section>
           <h2>Native JavaScript</h2>
-					<p>Fixing the prototype problem... with Ramda.</p>
+					<p>Enter: Ramda (or lodash/fp)</p>
 
-<iframe class="ace" width=810 height=350 data-mode="javascript">
-// replace('')("don't ")("don't panic!")
+<iframe class="ace" width=810 height=400 data-mode="javascript">
 R.replace("don't ", '', "don't panic!") // -> 'panic!'
-
-
-// map(x => x + 1)([1, 2, 3])
-R.map(x => x + 1, [1, 2, 3]) // -> [2, 3, 4]
-
-
-// prop('answer')({ answer: 42 })
+R.map(R.inc, [1, 2, 3]) // -> [2, 3, 4]
 R.prop('answer', { answer: 42 }) // -> 42
+R.equals(42, n) // -> false
+
+const checkAnswer = R.compose(R.equals(42), R.prop('answer'))
+checkAnswer({ answer: 42 }) // -> true 
+checkAnswer({ answer: 100 }) // -> false 
+
+// And many more...
+R.not()
+R.lt(), R.gt(), 
+R.either(), R.both()
+R.ifElse()
+R.once()
+R.lens()
+R.lift()
 </iframe>
 	      </section>
 
+				<!--
+					const checkAnswer = R.ifElse(
+	R.both(R.has('answer'), R.compose(R.equals(42), R.prop('answer'))),
+	data => console.log('You are correct'),
+	data => Error('That is not the answer')
+)
+
+function checkAnswerImperatively(question) {
+	if (question.answer && question.answer === 42)
+		console.log('You are correct')
+	} else {
+		return Error('That is not the answer')
+	}
+}
+				-->
 				<!-- *********** -->
 				<!-- * SLIDE 6 * -->
 				<!-- *********** -->
@@ -352,31 +578,6 @@ adviseHumans(users)
 </iframe>
 	      </section>
 
-
-        <!-- * 6F * -->
-				<section data-transition="fade-in slide-out">
-					<h2>Native JavaScript</h2>
-					<p>With our curried, data-last utils...</p>
-
-<iframe class="ace" width=810 height=400 data-mode="javascript">
-const users = [ /* ... */ ]
-
-const getHumans = filter(user => user.species === 'Human')
-
-const abbreviate = user =>
-	map(part => join('')(map(toUpperCase(part[0]))))(split(' ')(prop('name')(user)))
-
-const advise = name => `Don't panic, ${name}!`
-
-const adviseHumans = users =>
-	map(user => advise(abbreviate(user)))(getHumans(users))
-
-adviseHumans(users)
-// -> ["Don't panic, TM!", "Don't panic, AD!"]
-</iframe>
-					<p>So much ugly butt!</p>
-				</section>
-
 				<!-- *********** -->
         <!-- * SLIDE 7 * -->
 				<!-- *********** -->
@@ -387,14 +588,14 @@ adviseHumans(users)
 <iframe class="ace" width=810 height=400 data-mode="javascript">
 const users = [ /* ... */ ]
 
-const getHumans = R.filter(R.compose(R.equals('Human'), R.prop('species')))
+const isHuman = R.compose(R.equals('Human'), R.prop('species'))
 
 const abbreviate =
 	R.compose(R.join(''), R.map(R.compose(R.toUpper, R.head)), R.split(' '), R.prop('name'))
 
 const advise = name => `Don't panic, ${name}!`
 
-const adviseHumans = R.compose(R.map(R.compose(advise, abbreviate)), getHumans)
+const adviseHumans = R.compose(R.map(R.compose(advise, abbreviate)), R.filter(isHuman))
 
 adviseHumans(users)
 // -> ["Don't panic, TM!", "Don't panic, AD!"]
@@ -422,13 +623,13 @@ users =
 	, { name = "Arthur Dent", species = "Human" }
 	]
 
-getHumans = filter <| (==) "Human" << .species
+isHuman = (==) "Human" << .species
 
 abbreviate = join "" << (map <| toUpper << left 1) << split " " << .name
 
 advise name = "Don't panic, " ++ name ++ "!"
 
-adviseHumans = (map <| advise << abbreviate) << getHumans
+adviseHumans = (map <| advise << abbreviate) << filter isHuman
 
 adviseHumans users
 -- -> ["Don't panic, TM!", "Don't panic, AD!"]
@@ -447,14 +648,14 @@ adviseHumans users
 				<!-- *********** -->
 				<section>
 					<h2>Recap</h2>
-					<hr class="style-eight"/>
+					<hr class="hr-lambda"/>
 					<ol>
 						<li>Small changes, but BIG woop!</li>
 						<li>Much of FP is not idomatic in JS</li>
 						<li>Libraries can only help so much</li>
 						<li>Purpose for syntax <del>chafe</del> change</li>
 					</ol>
-					<hr class="style-eight"/>
+					<hr class="hr-lambda"/>
 					<h3>Thank you!</h3>
 				</section>
 
@@ -463,7 +664,7 @@ adviseHumans users
 				<!-- ************ -->
 				<section>
 					<h2>Resources</h2>
-					<hr class="style-eight"/>
+					<hr class="hr-lambda"/>
 					<ol class="resources-list">
 						<li><a href="https://medium.com/@cscalfani/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536">So You Want to be a Functional programmer?</a> (6 part article), Charles Scalfani</li>
 						<li><a href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8">Curry or Partial Application</a> (article), Eric Elliot</li>
@@ -486,7 +687,7 @@ adviseHumans users
 				</section>
 				<section>
 					<h2>Resources</h2>
-					<hr class="style-eight"/>
+					<hr class="hr-lambda"/>
 					<ol class="resources-list">
 						<li>https://medium.com/@cscalfani/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536</li>
 						<li>https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8</li>

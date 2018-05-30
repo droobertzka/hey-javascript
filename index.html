@@ -164,19 +164,6 @@
 				<!-- *********** -->
         <!-- * SLIDE # * -->
 				<!-- *********** -->
-				<!--
-				<section>
-					<h2>Multi-Paradigm</h2>
-					<hr class="hr-lambda"/>
-					<p><b>JavaScript</b>: Imperative, Object Oriented, <br>Functional, but not Declarative</p>
-					<hr class="hr-lambda"/>
-					<h3><em>Learn both</em></h3>
-				</section>
-				-->
-
-				<!-- *********** -->
-        <!-- * SLIDE # * -->
-				<!-- *********** -->
 				<section>
 					<h2>Learn FP!</h2>
 					<hr class="hr-lambda"/>
@@ -187,22 +174,6 @@
 						<p class="short">very unfamiliar, that's OK</p>
 						<p class="short">there's no escape</p>
 				</section>
-
-				<!-- *********** -->
-        <!-- * SLIDE # * -->
-				<!-- *********** -->
-				<!--
-				<section>
-					<h2>FP Fundamentals</h2>
-					<hr class="hr-lambda"/>
-					<ul>
-						<li><b>Functions</b>: our fundamental building blocks</li>
-						<li><b>Composition</b>: how we combine & arrange logic</li>
-						<li><b>Data last</b>: compose logic, then pass data through</li>
-						<li><b>Currying & partial application</b>: make it all easier</li>
-					</ul>
-				</section>
-				-->
 
 				<!-- *********** -->
 				<!-- * SLIDE 3 * -->
@@ -448,21 +419,6 @@ R.lift()
 </iframe>
 	      </section>
 
-				<!--
-					const checkAnswer = R.ifElse(
-	R.both(R.has('answer'), R.compose(R.equals(42), R.prop('answer'))),
-	data => console.log('You are correct'),
-	data => Error('That is not the answer')
-)
-
-function checkAnswerImperatively(question) {
-	if (question.answer && question.answer === 42)
-		console.log('You are correct')
-	} else {
-		return Error('That is not the answer')
-	}
-}
-				-->
 				<!-- *********** -->
 				<!-- * SLIDE 6 * -->
 				<!-- *********** -->

@@ -329,7 +329,7 @@ const equals = first => second => first === second
 
 <iframe class="ace" width=810 height=350 data-mode="javascript">
 // "don't panic!".replace("don't ", '') -> 'panic!'
-replace('')("don't ")("don't panic!") // -> 'panic!'
+replace("don't ")('')("don't panic!") // -> 'panic!'
 
 // [1, 2, 3].map(x => x + 1) -> [2, 3, 4]
 map(x => x + 1)([1, 2, 3]) // -> [2, 3, 4]
@@ -388,7 +388,7 @@ replace("don't")('', "don't panic!") // -> 'panic!'
 // const map = curry(dataLast(Array.prototype.map), 2)
 map(x => x + 1, [1, 2, 3]) // -> [2, 3, 4]
 
-// const prop = curry((key, obj) => obj.key)
+// const prop = curry((key, obj) => obj[key])
 prop('answer', { answer: 42 }) // -> 42
 
 // const equals = curry((first, second) => first === second)
